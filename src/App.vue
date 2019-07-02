@@ -6,8 +6,10 @@
 
 <script>
   import Login from './components/Login'
+  import LeftForm from './components/LeftForm'
+  import RightImage from './components/RightImage'
 export default {
-  components:{Login}
+  components:{Login,LeftForm,RightImage}
 
 }
 </script>

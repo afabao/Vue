@@ -1,13 +1,15 @@
 <template>
     <div>
-        <input type="text" v-model="name">
-        <input type="text" v-model="age">
-        <button @click="getem">commit</button>
+<!--        <input type="text" v-model="name">-->
+<!--        <input type="text" v-model="age">-->
+<!--        <button @click="getem">commit</button>-->
+      <LeftForm/>
     </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import LeftForm from '../components/LeftForm'
   const axiosInstance = axios.create({
     headers: {'Content-Type': 'application/json;charset=utf-8'},
     withCredentials: true
@@ -30,7 +32,9 @@ export default {
          this.age = response.data[0].age;
        })
      }
-  }
+  },
+
+  components: {LeftForm}
 }
 </script>
 
