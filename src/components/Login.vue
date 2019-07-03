@@ -1,15 +1,16 @@
 <template>
-    <div>
-<!--        <input type="text" v-model="name">-->
-<!--        <input type="text" v-model="age">-->
-<!--        <button @click="getem">commit</button>-->
-      <LeftForm/>
-    </div>
+  <div class="login">
+    <Header/>
+    <Main/>
+    <Footer/>
+  </div>
 </template>
 
 <script>
   import axios from 'axios'
-  import LeftForm from '../components/LeftForm'
+  import Header from './Header'
+  import Main from './Main'
+  import Footer from './Footer'
   const axiosInstance = axios.create({
     headers: {'Content-Type': 'application/json;charset=utf-8'},
     withCredentials: true
@@ -17,27 +18,27 @@
 export default {
    data () {
      return {
-       name:'',
-       age:''
+        imgList:[
+          {id: 1,idView: '../assets/images/1.jpg'}
+        ]
      }
    },
 
   methods: {
-     getem: function(){
-       axiosInstance({
-         method: "get",
-         url: "/api/test"
-       }).then(response => {
-         this.name = response.data[0].name;
-         this.age = response.data[0].age;
-       })
-     }
+
   },
 
-  components: {LeftForm}
+  components:{Header,Main,Footer}
+
+
 }
 </script>
 
 <style scoped>
-
+  .login{
+    background: url("../assets/3.jpg");
+    width: 100%;
+    height: 100%;
+    position:fixed;
+  }
 </style>
