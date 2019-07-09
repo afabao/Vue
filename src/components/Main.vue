@@ -27,6 +27,7 @@
                   <el-input prefix-icon="el-icon-picture" placeholder="图片验证码" style="width: 150px"></el-input>
                   <div style="margin: 20px 0;"></div>
                   <el-input prefix-icon="el-icon-picture" placeholder="手机验证码" style="width: 150px"></el-input>
+<!--                  <img src="http://localhost:8080/travel/getVerify" alt="aaa">-->
                   <br/>
                   <div style="margin: 20px 0;"></div>
                   <el-link type="primary" >忘记密码?</el-link>
@@ -47,11 +48,20 @@
                   <div style="margin: 20px 0;"></div>
                   <el-input prefix-icon="el-icon-postcard" placeholder="确认密码" ></el-input>
                   <div style="margin: 20px 0;"></div>
-                  <el-input prefix-icon="el-icon-picture" placeholder="手机验证码" style="width: 150px"></el-input>
+                  <div>
+                    <div style="float: left">
+                      <el-input prefix-icon="el-icon-picture" placeholder="手机验证码" style="width: 150px"></el-input>
+                    </div>
+                    <div style="float: right">
+                      <img src="http://localhost:8080/travel/getVerify" alt="aaa">
+                    </div>
+                  </div>
                   <br/>
                   <div style="margin: 10px 0;"></div>
-                  <el-link type="primary" >条款</el-link><br/>
-                  <el-checkbox v-model="checked">已阅读</el-checkbox>
+                  <div style="clear: both">
+                    <el-link type="primary" style="float: bottom">条款</el-link><br/>
+                    <el-checkbox v-model="checked">已阅读</el-checkbox>
+                  </div>
                   <div style="margin: 20px 0;"></div>
                   <el-form-item >
                     <el-button type="primary" @click="submitForm('ruleForm')">立即注册</el-button>
@@ -84,7 +94,8 @@
             {id:0,idView:require("../assets/1.jpg")},
             {id:0,idView:require("../assets/2.jpg")},
             {id:0,idView:require("../assets/3.jpg")}
-          ]
+          ],
+          url: "/travel/getVerify"
         }
       }
     }
@@ -130,7 +141,7 @@
     line-height: 25px;
   }
   .tab{
-    width: 333.75px;
+    width: 350px;
     height: 50px;
     border-bottom: lightgray solid 1px;
   }
