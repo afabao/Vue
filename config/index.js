@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8080/travel',
         //secure: false  https接口需配置
         changeOrigin: true,
         pathRewrite:{

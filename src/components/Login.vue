@@ -7,14 +7,10 @@
 </template>
 
 <script>
-  import axios from 'axios'
+
   import Header from './Header'
   import Main from './Main'
   import Footer from './Footer'
-  const axiosInstance = axios.create({
-    headers: {'Content-Type': 'application/json;charset=utf-8'},
-    withCredentials: true
-  })
 export default {
    data () {
      return {
