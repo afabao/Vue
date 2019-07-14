@@ -3,12 +3,60 @@ import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
+import router from './router/index'
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = '/api'  //关键代码
 
 Vue.use (ElementUI)
 new Vue({
   el: '#app',
+  router: router,
   components:{App},
-  template: '<App/>'
-})
+  template: '<App/>',
+  mode: 'history'
+});
+
+
+//异步请求前在header里加入token
+axios.interceptors.request.use(
+  config => {
+      if(localStorage.getItem("Authorization")){
+        console.log(localStorage.getItem("Authorization"));
+        config.headers.Authorization = localStorage.getItem("Authorization");
+      }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  });
+
+//异步请求后，判断token是否过期
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    if(error.response){
+      switch (error.response.status) {
+        case 401:
+          localStorage.removeItem("Authorization");
+          this.$router.push("/");
+      }
+    }
+  });
+  //异步请求前判断请求的连接是否需要token
+  router.beforeEach((to, from, next) => {
+    if (to.path === '/') {
+      next();
+    } else {
+      let token = localStorage.getItem('Authorization');
+      console.log("我是浏览器本地缓存的token: "+token);
+      if (token === 'null' || token === '') {
+        next('/');
+      } else {
+        next();
+      }
+    }
+  });
+
+

@@ -7,26 +7,20 @@
 </template>
 
 <script>
-
   import Header from './Header'
   import Main from './Main'
   import Footer from './Footer'
 export default {
    data () {
      return {
-        imgList:[
-          {id: 1,idView: '../assets/images/1.jpg'}
-        ]
+
      }
    },
 
   methods: {
 
   },
-
   components:{Header,Main,Footer}
-
-
 }
 </script>
 
