@@ -304,14 +304,20 @@
                 userEmail: this.loginForm.userEmail,
                 userPassword: this.loginForm.userPassword,
               }).then(function (data) {
-                console.log(data)
+                console.log(data.data.code === 10001)
                 if(data.data.code === 10001){
-
-                  alert(data.data.msg)
+                  _this.$alert(data.data.msg,"提示",{
+                    confirmButtonText:"确定",
+                  })
                 }else{
                   _this.userToken = data.data.token;
                   _this.set_token({token:_this.userToken})
-                  _this.$router.push({path:'/index'})
+                  _this.$alert("登录成功","提示",{
+                    confirmButtonText:"确定",
+                    callback: setTimeout => {
+                      _this.$router.push({path:'/index'})
+                    }
+                  },1000)
                 }
               }).catch(function (error) {
 
