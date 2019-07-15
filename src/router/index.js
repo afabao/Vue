@@ -4,7 +4,7 @@ import index from '../components/index/Index'
 import login from '../components/Login'
 import countDown from '../components/CountDown'
 Vue.use(Router)
-
+// 页面刷新时，重新赋值token
 
 const router = new Router({
   routes: [
@@ -18,17 +18,15 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/') {
     next();
   } else {
-    let token = localStorage.getItem('Authorization');
-
+    let token = localStorage.getItem('token');
     if (token === 'null' || token === '') {
       next('/login');
     } else {
       next();
     }
   }
-
 });
+
 export default router
 
-//导航守卫判断用户是否登陆
 

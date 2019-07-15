@@ -4,6 +4,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import router from './router/index'
+import store from './store'
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = '/api'  //关键代码
 
@@ -11,25 +12,17 @@ Vue.use (ElementUI)
 new Vue({
   el: '#app',
   router: router,
+  store,
   components:{App},
   template: '<App/>',
   mode: 'history'
 });
 
-
 //异步请求前在header里加入token
-axios.interceptors.request.use(
-  config => {
-      if(localStorage.getItem("Authorization")){
-        console.log(localStorage.getItem("Authorization"));
-        config.headers.Authorization = localStorage.getItem("Authorization");
-      }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  });
-
+axios.interceptors.request.use(function(config){
+  config.headers.token=localStorage.getItem("token");
+  return config;
+})
 //异步请求后，判断token是否过期
 axios.interceptors.response.use(
   response => {
@@ -39,7 +32,7 @@ axios.interceptors.response.use(
     if(error.response){
       switch (error.response.status) {
         case 401:
-          localStorage.removeItem("Authorization");
+          localStorage.removeItem("token");
           this.$router.push("/");
       }
     }
@@ -49,7 +42,7 @@ axios.interceptors.response.use(
     if (to.path === '/') {
       next();
     } else {
-      let token = localStorage.getItem('Authorization');
+      let token = localStorage.getItem('token');
       console.log("我是浏览器本地缓存的token: "+token);
       if (token === 'null' || token === '') {
         next('/');

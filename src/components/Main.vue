@@ -1,19 +1,4 @@
 <template>
-<!--  <div class="main">-->
-<!--    <div class="left">-->
-<!--      <div class="tab">-->
-<!--        <div class="tab-left">-->
-<!--          <p>登陆</p>-->
-<!--        </div>-->
-<!--        <div class="tab-right">-->
-<!--          <p>注册</p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="right">-->
-<!--      <div>a</div>-->
-<!--    </div>-->
-<!--  </div>-->
   <div>
     <el-row :gutter="20">
       <el-col :span="6" :offset="3">
@@ -278,8 +263,6 @@
       //实例
       components:{identify,loginIdentify},
 
-      //路由
-
       methods:{
         submitForm(formName){
           const _this = this
@@ -307,21 +290,17 @@
               })
 
             }else{
-              //alert("error")
               return false;
             }
           })
         },
-        ...mapMutations(['changeLogin']),
+        ...mapMutations(['set_token']),
         login(loginForm){
           const _this = this
           //_this.$router.push({path:'/index'})
           this.$refs[loginForm].validate((valid) => {
             if(valid){
-              axios.create({
-                headers: {'Content-Type': 'application/json;charset=utf-8',"Authorization": ""},
-                withCredentials: true
-              }).post('/login',{
+              axios.post('/login',{
                 userEmail: this.loginForm.userEmail,
                 userPassword: this.loginForm.userPassword,
               }).then(function (data) {
@@ -330,10 +309,8 @@
 
                   alert(data.data.msg)
                 }else{
-                  //_this.userToken = 'Bearer' + data.data.token;
-                  console.log(data.data.token)
-                  _this.changeLogin({token: data.data.token})
-                  alert(1)
+                  _this.userToken = data.data.token;
+                  _this.set_token({token:_this.userToken})
                   _this.$router.push({path:'/index'})
                 }
               }).catch(function (error) {
