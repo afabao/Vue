@@ -5,10 +5,15 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import router from './router/index'
 import store from './store'
+import a from 'vue-infinite-scroll'
+import InfiniteLoading from 'vue-infinite-loading';
+import { InfiniteScroll } from 'mint-ui'
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = '/api'  //关键代码
 
-Vue.use (ElementUI)
+Vue.use (InfiniteScroll)
+Vue.use(ElementUI)
+Vue.use(InfiniteLoading)
 new Vue({
   el: '#app',
   router: router,
