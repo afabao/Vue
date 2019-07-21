@@ -23,6 +23,7 @@
           </el-submenu>
         </el-submenu>
         <el-menu-item index="3" disabled>消息中心</el-menu-item>
+        <el-menu-item index="7" @click="myTravel">我的旅途</el-menu-item>
         <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 
         <el-menu-item index="5" style="float: right;"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
@@ -30,10 +31,16 @@
       </el-menu>
       <div>
         <div>
-          <p v-for="item in list">
-            Line:
-            <span v-text="item"></span>
-          </p>
+<!--          <p v-for="item in list">-->
+<!--            Line:-->
+<!--            <span v-text="item"></span>-->
+<!--          </p>-->
+          <div  v-for="item in list">
+            <div v-text="item" class="list">
+
+            </div>
+            <div style="border: black 1px solid"></div>
+          </div>
           <!--infinite-loading这个组件要放在列表的底部，滚动的盒子里面！-->
           <infinite-loading @infinite="infiniteHandler"></infinite-loading>
         </div>
@@ -61,11 +68,15 @@
             $state.loaded();
           }, 1000);
         },
+        myTravel () {
+          this.$router.push({path:"/myTravel"})
+        }
       },
     }
 </script>
 
 <style scoped>
-
-
+  .list{
+    background-color: #99a9bf;
+  }
 </style>

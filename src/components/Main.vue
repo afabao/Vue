@@ -313,7 +313,7 @@
                   _this.userToken = data.data.token;
                   _this.set_token({token:_this.userToken})
                   _this.$alert("登录成功","提示",{
-                    confirmButtonText:"确定",
+                      confirmButtonText:"确定",
                     callback: setTimeout => {
                       _this.$router.push({path:'/index'})
                     }
